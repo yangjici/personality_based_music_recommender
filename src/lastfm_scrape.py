@@ -207,7 +207,7 @@ all_songs_tags.to_csv('all_song_tags.csv')
 # def single_song_tag_crawler_multi_threaded(song, artist):
 #     url_root ='http://ws.audioscrobbler.com/2.0/'
 #     empty=pd.DataFrame({'name':song,'artist':artist,"tags":[[]]})
-#     api_key = 'b287e973174474be25ecf66adaf53c5b'
+#     api_key = os.environ['LASTFM_API_KEY']
 #     method = 'track.gettoptags'
 #     pay_load = {'api_key': api_key,'artist':artist,'track':song,'method':method,'format':'json','autocorrect':'1'}
 #     response = requests.get(url_root,pay_load)
