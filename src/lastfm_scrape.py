@@ -30,7 +30,7 @@ mbid: musicbrainid of the song '''
 def single_user_crawler(user,userid):
     empty= pd.DataFrame([])
     url_root ='http://ws.audioscrobbler.com/2.0/'
-    api_key = 'b287e973174474be25ecf66adaf53c5b'
+    api_key = os.environ['LASTFM_API_KEY']
     limit = '3000'
     method = 'user.gettoptracks'
     pay_load = {'api_key': api_key,'user':user,'method':method,'format':'json','limit':limit}
@@ -67,7 +67,7 @@ all_result.to_csv('user_top_songs.csv',encoding='utf-8-sig')
 def single_song_tag_crawler(song,artist):
     url_root ='http://ws.audioscrobbler.com/2.0/'
     empty=pd.DataFrame({'name':song,'artist':artist,"tags":[[]]})
-    api_key = 'b287e973174474be25ecf66adaf53c5b'
+    api_key = os.environ['LASTFM_API_KEY']
     method = 'track.gettoptags'
     pay_load = {'api_key': api_key,'artist':artist,'track':song,'method':method,'format':'json','autocorrect':'1'}
     response = requests.get(url_root,pay_load)

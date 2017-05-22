@@ -3,6 +3,10 @@ from itertools import izip
 import pandas as pd
 from sparse_matrix_process import get_user_hashmap,symmetrize
 from numbers import Number
+<<<<<<< Updated upstream
+=======
+import scipy.stats as ss
+>>>>>>> Stashed changes
 from numpy.random import choice
 
 class Personality_Rating_Hybrid(object):
@@ -17,7 +21,10 @@ class Personality_Rating_Hybrid(object):
             weight: float, the weight placed on user's personality in hybrid model
             nd rating
         '''
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         sim_options= {'pearson_sim': self._pearson_sparse_sim,'adj_pearson': self._adj_pearson_sim,'spearman_sim': self._spearman_rank}
         self.method =None
         self.sim_function= sim_options[sim_option]
@@ -33,6 +40,11 @@ class Personality_Rating_Hybrid(object):
         self.weight = 0.5
         self.test_set ={}
         self.matches = {}
+<<<<<<< Updated upstream
+=======
+        self.baseline_artist = {}
+        self.baseline_index = {}
+>>>>>>> Stashed changes
 
     def train(self, ratings, user_column = 'user_id', personality = None, method='rating', weight=0.5):
 
@@ -53,8 +65,11 @@ class Personality_Rating_Hybrid(object):
 
         weight: float, user_sim = weight*user_rating + (1-weight)*user_personality
         '''
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
         ratings = ratings.copy()
         user_id = ratings[user_column]
         ratings.drop(user_column,axis=1,inplace=True)
@@ -62,6 +77,7 @@ class Personality_Rating_Hybrid(object):
         self.method = method
 
         #create user to row index dictionary'''
+<<<<<<< Updated upstream
 
         self.user_id_index = { ind:uid for ind,uid in enumerate(user_id)}
 
@@ -77,6 +93,15 @@ class Personality_Rating_Hybrid(object):
 
         self.ratings = ratings
 
+=======
+        self.user_id_index = { ind:uid for ind,uid in enumerate(user_id)}
+        #create artist to column index dictionary'''
+        artists = ratings.columns.values
+        self.artist_id_index = {ind:aid for ind,aid in enumerate(artists)}
+        ratings = np.array(ratings)
+        #store ratings'''
+        self.ratings = ratings
+>>>>>>> Stashed changes
         if method != 'rating':
             # store personality
             personality = np.array(personality)
@@ -95,6 +120,7 @@ class Personality_Rating_Hybrid(object):
         elif method == 'personality':
             self.user_sim = self.personality_sim(personality)
 
+<<<<<<< Updated upstream
 
 
     def personality_sim(self,personality,otherpersonality=None):
@@ -103,12 +129,20 @@ class Personality_Rating_Hybrid(object):
 
         output: np.array: user's personality similarity matrix
 
+=======
+    def personality_sim(self,personality,otherpersonality=None):
+        '''input: np.array, list of list: user's big 5 personality
+        output: np.array: user's personality similarity matrix
+>>>>>>> Stashed changes
         save personality similiarity
          '''
         personality_dist = np.corrcoef(personality,otherpersonality)
         return personality_dist
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
     # def pearson_sim(self,user1,user2):
     #
     #     '''
@@ -198,6 +232,15 @@ class Personality_Rating_Hybrid(object):
 
 
     def mod_rating_distance(self):
+<<<<<<< Updated upstream
+=======
+        '''
+        iterate through each users and calculate user distance using the choosen
+        distance metrics
+
+        returns: user distance matrix
+         '''
+>>>>>>> Stashed changes
         #finding similarity between user to every other users
         n_users = len(self.train_hash_list)
         matrix=np.zeros((n_users,n_users))
@@ -271,8 +314,14 @@ class Personality_Rating_Hybrid(object):
 
 
     def _recommend_top_n_artist(self,user,top,n_artist):
+<<<<<<< Updated upstream
         #input: one user's similarity to other users
         #find the row index of n most similar users to that user
+=======
+        '''input: one row of user's similarity matrix
+        output:  the row index of n most similar users to that user
+        '''
+>>>>>>> Stashed changes
         top_similar_users=np.argsort(-user)[:top]
         #find their ratings based on the row index
         top_user_ratings = self.ratings.take(top_similar_users,axis=0)
@@ -292,7 +341,15 @@ class Personality_Rating_Hybrid(object):
 
 
     def _personality_dist(self,personality):
+<<<<<<< Updated upstream
         #recommend user artists based on personality similarity only
+=======
+        '''
+        input: numpy matrix of user personality
+
+        calls on function to recommend user artists based on personality
+        similarity only'''
+>>>>>>> Stashed changes
         length = len(personality)
         #distance of the user to each of the other users
         personality_dist = self.personality_sim(personality,self.personality)[:length,length:]
@@ -300,7 +357,19 @@ class Personality_Rating_Hybrid(object):
 
 
     def _get_test_rating_distance(self,hash_rating):
+<<<<<<< Updated upstream
         #get distance for test user's rating to every other training users
+=======
+        '''
+        input:
+        hash_rating: (dictionary) hash map representation of user rating matrix
+        output : numpy matrix of user similarity
+
+        get similarity for each test user to every other training users
+        based on the similarity function
+
+        '''
+>>>>>>> Stashed changes
         n_test_users = len(hash_rating)
         n_train_users = len(self.train_hash_list)
         matrix=np.zeros((n_test_users,n_train_users))
@@ -312,6 +381,7 @@ class Personality_Rating_Hybrid(object):
                 matrix[i,j] = pearson
         return matrix
 
+<<<<<<< Updated upstream
 
     def _distance_based_rec(self,userid,user_dis,top,n_artist):
         #recommendation based on distance
@@ -321,6 +391,40 @@ class Personality_Rating_Hybrid(object):
     # def _recommend_top_n_songs()
 
     def _take_n_out(self,userid,hash_ratings,leave_out):
+=======
+    def _distance_based_rec(self,userid,user_dis,top,n_artist):
+        '''
+        input:
+        userid: numpy array,list:  users' ids
+        user_dis: numpy array: user similarity matrix
+        top: the top n most similar user
+        n_artist: top n artist from each of the similar users
+
+        output:
+        artist_rec_index: dictionary: user id being the key and the index of
+        recommended artist for that user being the values
+        '''
+        for uid, userdist in zip(userid,user_dis):
+            print uid
+            self.artist_recommendations[uid],self.artist_rec_index[uid] = self._recommend_top_n_artist(userdist,top,n_artist)
+        return self.artist_rec_index
+    # def _recommend_top_n_songs()
+
+    def _take_n_out(self,userid,hash_ratings,leave_out):
+        '''
+        take n artists out from each test user's top 50 percentile most listened
+        artist to evaluation model performance
+
+        input:
+        userid: numpy array,list:  users' ids
+        hash_rating: (dictionary) hash map representation of user rating matrix
+        leave_out: int: the number of artists to leave out from each test user
+
+        output:
+        the hashmap of user's rating with n artists and rating removed
+
+        '''
+>>>>>>> Stashed changes
         for i in range(len(hash_ratings)):
             if len(hash_ratings[i]) <= leave_out:
                 self.test_set[userid[i]] = []
@@ -344,6 +448,7 @@ class Personality_Rating_Hybrid(object):
                     hash_ratings[i].pop(k)
         return hash_ratings
 
+<<<<<<< Updated upstream
 
 
     def recommendation_accuracy(self):
@@ -354,6 +459,37 @@ class Personality_Rating_Hybrid(object):
                 self.matches[key] = matches
                 match_count+=1
         return match_count/len(self.artist_rec_index)
+=======
+    def recommendation_accuracy(self,artist_index):
+
+        '''
+        input: a dictionary of recommended user to recommended artist index
+        output: the percentages of users whose top 50 percentile artist is within
+        the recommended artists
+        '''
+        matches = {}
+        match_count = 0.0
+        for key in artist_index:
+            print key
+            key_matches = list(set(self.test_set[key]) & set(artist_index[key]))
+            if key_matches:
+                matches[key] = key_matches
+                match_count+=1
+        return match_count/len(artist_index), matches
+
+    def recommend_random(self,user_id,n_artist,top):
+
+        '''
+        sample with replacement (n_artist * top) random artist from the
+        artist list to each test users
+        '''
+        for uid in user_id:
+            n = n_artist*top
+            random_key = list(set(choice(self.artist_id_index.keys(),n)))
+            random_artist = [self.artist_id_index[key] for key in random_key]
+            self.baseline_artist[uid] , self.baseline_index[uid] = random_artist,random_key
+        return self.baseline_index
+>>>>>>> Stashed changes
 
 
     def score(self,id_col='user_id',ratings=None,personality=None,top=5,n_artist=5,leave_out=4):
@@ -382,6 +518,7 @@ class Personality_Rating_Hybrid(object):
 
         if self.method in ['personality','hybrid']:
             personality = np.array(personality)
+<<<<<<< Updated upstream
         if self.method == 'hybrid':
             personality_dist = self._personality_dist(personality)
             test_rating_distance=self._get_test_rating_distance(leave_n_out_ratings)
@@ -395,3 +532,22 @@ class Personality_Rating_Hybrid(object):
         self._distance_based_rec(userid,overall_dist,top,n_artist)
 
         return self.recommendation_accuracy()
+=======
+            if self.method == 'hybrid':
+                personality_dist = self._personality_dist(personality)
+                test_rating_distance=self._get_test_rating_distance(leave_n_out_ratings)
+                overall_dist = self.weight*personality_dist + (1-self.weight)*test_rating_distance
+            if self.method == 'personality':
+                overall_dist = self._personality_dist(personality)
+        elif self.method == 'rating':
+            overall_dist = self._get_test_rating_distance(leave_n_out_ratings)
+
+        recommended_artists_ind=self._distance_based_rec(userid,overall_dist,top,n_artist)
+
+        random_artist_ind=self.recommend_random(userid,top,n_artist)
+
+        self.score, self.model_matches = self.recommendation_accuracy(recommended_artists_ind)
+        self.basescore, self.basematches = self.recommendation_accuracy(random_artist_ind)
+
+        print 'the baseline model scored {}, the {} recommender scored {}'.format(self.basescore,self.method,self.score)
+>>>>>>> Stashed changes
