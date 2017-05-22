@@ -1,8 +1,8 @@
-#Summary
+##Summary
 
 For the capstone project at Galvanize Data Science Program, I built an artist recommender from scratch that incoporates user's personality as part of its collaborative filtering (CF) algorithm. I also implemented artist rating based CF as well as a hybrid algorithm that uses both user's ratings and personality.
 
-#Motivation
+##Motivation
 
 Have you ever encountered a song that you identify with so much that, in time, it has become part of your identity? 
 
@@ -18,7 +18,7 @@ Obtaining user personality might sound labor intensive but in fact it is as quic
 
 How did my personality based recommendation perform? keep reading and find out!
 
-#My Data
+##My Data
 
 I reached out to the admins at a mypersonality.org, a well-known psychometrics databased used by numerous psychology researchers. From there I obtained 2000 users with both big 5 personality test results and user name to lastfm.
 
@@ -31,7 +31,7 @@ The user-rating matrix for individual songs is ultra sparse (~0.05%) The user-ra
 
 Sparsity of ratings is mainly a result of lack of users in our dataset, as it is uncommon to gather joint information about user's listening history and their personality. However, with a challenge comes an opportunity: the issue at hand very much resembles a case of cold start. Will personality of the users come to rescue? Stay and find out!
 
-#Methodology
+##Methodology
 
 We need to estimate the implicit rating of user to a given artist based on the play count information. First we normalize the play count for each artist by total play count. Then we represented a user's rating to an artist on a percentile function from 1 to 4 by each user. Lastly, we subtract each user's rating by their own mean to establish relative baseline for each user. 
 
@@ -47,7 +47,7 @@ Since the rating data is sparse and user similiarity results may not be reliable
 
 Lastly, I generated a hybrid similarity matrix combining user personality and rating based similarity with an weighted average. 
 
-#Model Evaluation
+##Model Evaluation
 
 Two baseline models have been created to compare with my models. The random model simply uniformly generate a random float number between 1 and 4 for each of the artists. The Beyonce model fills the rating matrix with the average rating of the most listened artist in my dataset. (Beyonce)
 
@@ -55,7 +55,7 @@ The user is split into ~1400 samples training set and ~300 samples testing set. 
 
 The random model yielded RMSE of 1.8 and Beyonce model has RMSE of 1.1. In my CF model, user similarity performed the best using Spearman's rank correlation for rating, with a RMSE of 0.9, and Personality based similarity model yielded a RMSE of 0.85. Lastly, the hybrid model generated a RMSE of 1.1. 
 
-#Discussion
+##Discussion
 
 From result shown above, it seems that personality based user similarity performed just as well as rating based similarity under the condition of sparsity. However, knowing the user's personality have added benefit of immediately matching new users with other similar users.
 
