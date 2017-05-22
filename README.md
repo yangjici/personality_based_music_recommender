@@ -39,13 +39,9 @@ In my recommender, I implemented user-based neighborhood model of collaborative 
 
 Conventionally, user similarity is determined before recommendation by calculating a correlation coefficient between users using the user's ratings on common items. In my approach, I implemented Pearson's product-moment correlation coefficient, a custom, adjusted pearson's correlation (to be discussed later), Spearman's rank correlation.
 
-Pearson's correlation is calculated on the common set of items ratings between the users. However, it lack confidence when the sample is small. In order to penalize similarity scores that are based on small number of overlapping items, which reflect a lack of confidence and prior disposition of users not sharing similar music taste, adjusted pearson's coefficient sets a control requirement of items two users must have in common before penality is applied. 
+Pearson's correlation is calculated on the common set of items ratings between the users. However, it lack confidence when the sample is small. In order to penalize similarity scores that are based on small number of overlapping items, which reflect a lack of confidence and prior disposition of users not sharing similar music taste, adjusted pearson's coefficient sets a control requirement of items two users must have in common before penality is applied. Additionally, the Spearman's rank correlation is implemented to be more robust against outliers, account for lack of confidence from small samples in rating data. 
 
-Additionally, the Spearman's rank correlation is implemented to be more robust against outliers, account for lack of confidence from small samples in rating data.
-
-Since the rating data is sparse and user similiarity results may not be reliable, we can also determine user's similarity based on their big 5 personality score. The similarity between two users is calculated by pearson's correlation. The hope is that knowing user's personality similarity we can make up for the lack of accuracy from user's ratings.
-
-Lastly, I generated a hybrid similarity matrix combining user personality and rating based similarity with an weighted average. 
+Since the rating data is sparse and user similiarity results may not be reliable, we can also determine user's similarity based on their big 5 personality score. The similarity between two users is calculated by pearson's correlation. The hope is that knowing user's personality similarity we can make up for the lack of accuracy from user's ratings. Lastly, I generated a hybrid similarity matrix combining user personality and rating based similarity with an weighted average. 
 
 ## Model Evaluation
 
@@ -54,6 +50,8 @@ Two baseline models have been created to compare with my models. The random mode
 The user is split into ~1400 samples training set and ~300 samples testing set. Cross validation is done using leave 5 out method: in each run, 5 known artist ratings are taken out at random for users in the testing. The model will generates a prediction for these unknown ratings and calculate the prediction error in RMSE.
 
 The random model yielded RMSE of 1.8 and Beyonce model has RMSE of 1.1. In my CF model, user similarity performed the best using Spearman's rank correlation for rating, with a RMSE of 0.9, and Personality based similarity model yielded a RMSE of 0.85. Lastly, the hybrid model generated a RMSE of 1.1. 
+
+![alt text]()![alt text]()
 
 ## Discussion
 
