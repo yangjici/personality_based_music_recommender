@@ -51,7 +51,7 @@ The user is split into ~1400 samples training set and ~300 samples testing set. 
 
 The random model yielded RMSE of 1.8 and Beyonce model has RMSE of 1.1. In my CF model, user similarity performed the best using Spearman's rank correlation for rating, with a RMSE of 0.9, and Personality based similarity model yielded a RMSE of 0.85. Lastly, the hybrid model generated a RMSE of 1.1. 
 
-![alt text](https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/baseline_models.png)![alt text]()
+![alt text](https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/baseline_models.png)![alt text](https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/my_models.png)
 
 ## Discussion
 
