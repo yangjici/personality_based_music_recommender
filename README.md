@@ -4,15 +4,9 @@ For the capstone project at Galvanize Data Science Program, I built an artist re
 
 ## Motivation
 
-Have you ever encountered a song that you identify with so much that, in time, it has become part of your identity? 
+Have you ever encountered a song that you identify with so much that, in time, it has become part of your identity? We choose to listen to music that reflect our quintenssence, guide our decisions, and shape us to be who we are. With this idealistic notion in mind, I have wondered whether similar minded person would enjoy similar artists and songs. And, more importantly, whether knowing a person's personality would help us make better music and artist recommendations.
 
-I have. 
-
-I have noticed that we choose to listen to music that reflect our quintenssence, guide our decisions, and shape us to be who we are.
-
-With this idealistic notion in mind, I have wondered whether similar minded person would enjoy similar artists and songs. And, more importantly, whether knowing a person's personality would help us make better music and artist recommendations.
-
-All recommender engine feel the pain of dealing with the problem of coldstart. In the case of user rating based CF,it is difficult to match a new user with other similar users with good confidence. However, knowing the personality of the new user we can match him/her to other users quickly and start making informed recommendations as soon as user personality information is obtained.
+All recommender engine feel the pain of dealing with the problem of cold start. In the case of user rating based CF,it is difficult to match a new user with other similar users with good confidence. However, knowing the personality of the new user we can match him/her to other users quickly and start making informed recommendations as soon as user personality information is obtained.
 
 Obtaining user personality might sound labor intensive but in fact it is as quick as [applying magic sauce](https://applymagicsauce.com/) -  a profile based personality mining interface that allows for quick inference. Imagine quickly plug a new user in a community of like-minded person and make good recommendation! No more cold start! 
 
@@ -27,9 +21,7 @@ More information on big 5 can be found [here](https://www.123test.com/big-five-p
 
 Lastfm compiles and record user's listen history from numerous popular sources such as spotify, and itunes. From [Lastfm API](http://www.last.fm/api), I was able to retrieve the entire listening history for each of the users. The listening history include the play counts of songs and their artists. Overall, there are approximately 1.5 million unique songs and 40 thousand unique artists for the users I retrieved. 
 
-The user-rating matrix for individual songs is ultra sparse (~0.05%) The user-rating for artistis is less sparse but is still only 0.7% populated. 20% of user-pairs have no common artists and 36% of them have 5 or less common artists.
-
-Sparsity of ratings is mainly a result of lack of users in our dataset, as it is uncommon to gather joint information about user's listening history and their personality. However, with a challenge comes an opportunity: the issue at hand very much resembles a case of cold start. Will personality of the users come to rescue? Stay and find out!
+The user-rating matrix for individual songs is ultra sparse (~0.05%) The user-rating for artistis is less sparse but is still only 0.7% populated. 20% of user-pairs have no common artists and 36% of them have 5 or less common artists. Sparsity of ratings is mainly a result of lack of users in our dataset, as it is uncommon to gather joint information about user's listening history and their personality. However, with a challenge comes an opportunity: the issue at hand very much resembles a case of cold start. Will personality of the users come to rescue? Stay and find out!
 
 ## Methodology
 
@@ -55,13 +47,11 @@ The random model yielded RMSE of 1.8 and Beyonce model has RMSE of 1.1. In my CF
 
 ## Discussion
 
-From result shown above, it seems that personality based user similarity performed just as well as rating based similarity under the condition of sparsity. However, knowing the user's personality have added benefit of immediately matching new users with other similar users.
-
-What was surprising is that hybrid model performed worse than rating or personality based similarity alone. What I suspect is that both personality and rating has some good signals for different user pairs but combining it together obfuscated the true signal.
+From result shown above, it seems that personality based user similarity performed just as well as rating based similarity under the condition of sparsity. However, knowing the user's personality have added benefit of immediately matching new users with other similar users. What was surprising is that hybrid model performed worse than rating or personality based similarity alone. What I suspect is that both personality and rating has some good signals for different user pairs but combining it together obfuscated the true signal.
 
 For the next part of the project, I will create a pipeline to fully automate the process of music recommendation by simply entering user's personality and their lastfm username.
 
-Thanks for reading 
+Thank you for reading!
  
 
 
