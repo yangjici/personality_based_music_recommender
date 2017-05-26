@@ -9,7 +9,7 @@ Have you ever encountered a song that you identify with so much that, in time, i
 All recommender engine feel the pain of dealing with the problem of cold start. In the case of user rating based CF,it is difficult to match a new user with other similar users with good confidence. However, knowing the personality of the new user we can match him/her to other users quickly and start making informed recommendations as soon as user personality information is obtained.
 
 Obtaining user personality might sound labor intensive but in fact it is as quick as [applying magic sauce](https://applymagicsauce.com/) -  a profile based personality mining interface that allows for quick inference. Imagine quickly plug a new user in a community of like-minded person and make good recommendation! No more cold start! 
-![alt text](https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/3.png)
+![alt text](https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/3.png?style=centerme)
 
 How did my personality based recommendation perform? keep reading and find out!
 
