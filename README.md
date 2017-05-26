@@ -10,6 +10,7 @@ All recommender engine feel the pain of dealing with the problem of cold start. 
 
 Obtaining user personality might sound labor intensive but in fact it is as quick as [applying magic sauce](https://applymagicsauce.com/) -  a profile based personality mining interface that allows for quick inference. Imagine quickly plug a new user in a community of like-minded person and make good recommendation! No more cold start! 
 ![alt text](https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/3.png)
+
 How did my personality based recommendation perform? keep reading and find out!
 
 ## My Data
