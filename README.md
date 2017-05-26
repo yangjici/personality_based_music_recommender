@@ -20,6 +20,9 @@ I reached out to the admins at a mypersonality.org, a well-known psychometrics d
 Big 5 is currently the most well known and accepted personality factor model. The scale of the underlying traits: openness, conscientiousness, extroversion, agreeableness, neuroticism, ranges from 1 to 7.
 More information on big 5 can be found [here](https://www.123test.com/big-five-personality-theory/) 
 
+![alt text](https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/tHeur8qj_wJEIja2LIG7BWFXo6XZ2d1PHA.png)
+
+
 Lastfm compiles and record user's listen history from numerous popular sources such as spotify, and itunes. From [Lastfm API](http://www.last.fm/api), I was able to retrieve the entire listening history for each of the users. The listening history include the play counts of songs and their artists. Overall, there are approximately 1.5 million unique songs and 40 thousand unique artists for the users I retrieved. 
 
 The user-rating matrix for individual songs is ultra sparse (~0.05%) The user-rating for artistis is less sparse but is still only 0.7% populated. 20% of user-pairs have no common artists and 36% of them have 5 or less common artists. Sparsity of ratings is mainly a result of lack of users in our dataset, as it is uncommon to gather joint information about user's listening history and their personality. However, with a challenge comes an opportunity: the issue at hand very much resembles a case of cold start. Will personality of the users come to rescue? Stay and find out!
