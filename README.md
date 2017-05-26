@@ -6,6 +6,8 @@ For the capstone project at Galvanize Data Science Program, I built an artist re
 
 Have you ever encountered a song that you identify with so much that, in time, it has become part of your identity? We choose to listen to music that reflect our quintenssence, guide our decisions, and shape us to be who we are. With this idealistic notion in mind, I have wondered whether similar minded person would enjoy similar artists and songs. And, more importantly, whether knowing a person's personality would help us make better music and artist recommendations.
 
+![alt text] (https://github.com/yangjici/personality_based_music_recommender/blob/master/graphs/shutterstock_356826281.jpg)
+
 All recommender engine feel the pain of dealing with the problem of cold start. In the case of user rating based CF,it is difficult to match a new user with other similar users with good confidence. However, knowing the personality of the new user we can match him/her to other users quickly and start making informed recommendations as soon as user personality information is obtained.
 
 Obtaining user personality might sound labor intensive but in fact it is as quick as [applying magic sauce](https://applymagicsauce.com/) -  a profile based personality mining interface that allows for quick inference. Imagine quickly plug a new user in a community of like-minded person and make good recommendation! No more cold start! 
