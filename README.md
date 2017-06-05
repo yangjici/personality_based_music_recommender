@@ -1,6 +1,6 @@
 ## Summary
 
-For the capstone project at Galvanize Data Science Program, I built an artist recommender from scratch that incoporates user's personality as part of its collaborative filtering (CF) algorithm. I also implemented artist rating based CF as well as a hybrid algorithm that uses both user's ratings and personality.
+For the capstone project at Galvanize Data Science Program, I built an artist recommender from scratch that incorporates user's personality as part of its collaborative filtering (CF) algorithm. I also implemented artist rating based CF as well as a hybrid algorithm that uses both user's ratings and personality.
 
 ## Motivation
 
