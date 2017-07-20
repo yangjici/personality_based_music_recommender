@@ -19,7 +19,6 @@ def get_hashmap(vec):
             hashmap[i] = value
     return hashmap
 
-
 def get_user_hashmap(user_data):
     '''make a list of user sparse hashman'''
     hash_list = []
@@ -46,8 +45,6 @@ def sparse_dot_product(a, b):
     for key in a.viewkeys() & b.viewkeys():
         dot_product += a[key] * b[key]
     return dot_product
-
-
 
 def pearson_sparse_sim(user1,user2):
     '''
@@ -109,8 +106,6 @@ def spearman_rank(user1,user2):
     spear = 1- nom/float(denom)
     return spear
 
-
-
 def mod_rating_distance(user_data):
     hash_list = get_user_hashmap(user_data)
     n_users = len(hash_list)
@@ -123,8 +118,6 @@ def mod_rating_distance(user_data):
             pearson = pearson_sparse_sim(user1,user2)
             matrix[i,j] = pearson
     return matrix
-
-
 
 if __name__ == '__main__':
 
@@ -144,9 +137,6 @@ if __name__ == '__main__':
     # should print 45
     print(dot_product)
 
-
-
-
 def _take_n_out(userid,hash_ratings,leave_out):
     test_set = {}
     for i in range(len(hash_ratings)):
@@ -165,7 +155,6 @@ def _take_n_out(userid,hash_ratings,leave_out):
             for k in keys_rm:
                 test_set[userid[i]] = k
                 hash_ratings[i].pop(k)
-
 
 def recommendation_accuracy(artist_rec_index,test_set):
     match_count = 0.0
