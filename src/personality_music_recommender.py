@@ -60,7 +60,6 @@ class Personality_Rating_Hybrid(object):
         ratings.drop(user_column,axis=1,inplace=True)
         self.weight = weight
         self.method = method
-
         #create user to row index dictionary'''
         self.user_id_index = { ind:uid for ind,uid in enumerate(user_id)}
         #create artist to column index dictionary'''
@@ -79,11 +78,9 @@ class Personality_Rating_Hybrid(object):
             self.train_hash_list = get_user_hashmap(ratings)
             self.rating_dist = self.mod_rating_distance()
             self.user_sim = weight*self.personality_dist + (1-weight)*self.rating_dist
-
         elif method == 'rating':
             self.train_hash_list = get_user_hashmap(ratings)
             self.user_sim = self.mod_rating_distance()
-
         elif method == 'personality':
             self.user_sim = self.personality_sim(personality)
             self.train_hash_list = get_user_hashmap(ratings)
@@ -114,8 +111,6 @@ class Personality_Rating_Hybrid(object):
     #     denom = np.sqrt(np.sum(user1_demean**2)*np.sum(user2_demean**2))
     #     pear = nom/denom
     #     return pear
-
-
     def _adj_pearson_sim(self,user1,user2,common=5):
 
         '''
@@ -131,7 +126,6 @@ class Personality_Rating_Hybrid(object):
         penality= min(len(common_keys), common)/float(common)
         adj_p = penality*p
         return adj_p
-
 
     def _pearson_sparse_sim(self,user1,user2):
         '''
@@ -182,7 +176,6 @@ class Personality_Rating_Hybrid(object):
         spear = 1-nom/float(denom)
         return spear
 
-
     def mod_rating_distance(self):
         '''
         iterate through each users and calculate user distance using the choosen
@@ -205,7 +198,6 @@ class Personality_Rating_Hybrid(object):
 
         return matrix
 
-
     # def rating_distance_metrics(self,user_data):
     #
     #     n_users = len(user_data)
@@ -220,7 +212,6 @@ class Personality_Rating_Hybrid(object):
     #     matrix[(inds[1], inds[0])] = matrix[inds]
     #
     #     return matrix
-
 
     def recommend(self,id_col='user_id',ratings=None,personality=None,top=5,n_artist=5):
         '''input:
@@ -262,7 +253,6 @@ class Personality_Rating_Hybrid(object):
         else:
             print "need either personality or rating"
 
-
     def _recommend_top_n_artist(self,user,top,n_artist):
         '''input: one row of user's similarity matrix
         output:  the row index of n most similar users to that user
@@ -284,7 +274,6 @@ class Personality_Rating_Hybrid(object):
             recommended_artists_ind.update(top_artists_ind)
         return recommended_artists,recommended_artists_ind
 
-
     def _personality_dist(self,personality):
         '''
         input: numpy matrix of user personality
@@ -295,7 +284,6 @@ class Personality_Rating_Hybrid(object):
         #distance of the user to each of the other users
         personality_dist = self.personality_sim(personality,self.personality)[:length,length:]
         return personality_dist
-
 
     def _get_test_rating_distance(self,hash_rating):
         '''
@@ -340,12 +328,10 @@ class Personality_Rating_Hybrid(object):
         '''
         take n artists out from each test user's top 50 percentile most listened
         artist to evaluation model performance
-
         input:
         userid: numpy array,list:  users' ids
         hash_rating: (dictionary) hash map representation of user rating matrix
         leave_out: int: the number of artists to leave out from each test user
-
         output:
         the hashmap of user's rating with n artists and rating removed
 
@@ -374,7 +360,6 @@ class Personality_Rating_Hybrid(object):
         return hash_ratings
 
     def recommendation_accuracy(self,artist_index):
-
         '''
         input: a dictionary of recommended user to recommended artist index
         output: the percentages of users whose top 50 percentile artist is within
@@ -402,7 +387,6 @@ class Personality_Rating_Hybrid(object):
             random_artist = [self.artist_id_index[key] for key in random_key]
             self.baseline_artist[uid] , self.baseline_index[uid] = random_artist,random_key
         return self.baseline_index
-
 
     def score(self,id_col='user_id',ratings=None,personality=None,top=5,n_artist=5,leave_out=4):
         '''
